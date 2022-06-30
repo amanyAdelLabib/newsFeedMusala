@@ -4,8 +4,8 @@ import styles from './styles';
 import { Colors } from './../../Utils/Colors';
 
 export const Tag: React.FC<{
-  category: String;
-  selectedCategory: String;
+  category: string;
+  selectedCategory: string;
   setSelectedCategory: Function;
 }> = ({category, selectedCategory, setSelectedCategory}) => {
   const textColor = useColorScheme() === 'dark' ? Colors.black : Colors.white;

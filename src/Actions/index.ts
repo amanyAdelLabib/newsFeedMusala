@@ -2,13 +2,14 @@ import {
   GET_NEWS_FEED_PENDING,
   GET_NEWS_FEED_SUCCESS,
   GET_NEWS_FEED_FAIL,
+  SEARCH_NEWS_PENDING.
+  SEARCH_NEWS_SUCCESS,
+  SEARCH_NEWS_FAIL
 } from './types';
-import {GetNewsFeed} from '../Services';
+import {GetNewsFeed,SearchNews} from '../Services';
 import {Category} from '../Constants';
 
-export const getNewsFeed = ( category: String = Category.business) =>(dispatch: Function) => {
-  console.log('getCurrenciesType');
-    console.log('data in getNewsFeed');
+export const getNewsFeed = ( category: string = Category.business) =>(dispatch: Function) => {
     dispatch({type: GET_NEWS_FEED_PENDING});
     GetNewsFeed(category)
       .then(res => {
@@ -22,9 +23,25 @@ export const getNewsFeed = ( category: String = Category.business) =>(dispatch: 
         }
       })
       .catch(err => {
-        // Alert.alert('Warning', 'Check your connection!');
-        console.log('in getNewsFeed catch');
         console.log(err);
         dispatch({type: GET_NEWS_FEED_FAIL,payload:{error:"cant load news"}});
       });
   };
+export const searchNewsFeed = ( word: string = '') =>(dispatch: Function) => {
+  dispatch({type: SEARCH_NEWS_PENDING});
+  SearchNews(word)
+    .then(res => {
+      if (res.status == 200) {
+        dispatch({
+          type: SEARCH_NEWS_SUCCESS,
+          payload: {response: res.data},
+        });
+      } else {
+        dispatch({type: SEARCH_NEWS_FAIL,payload:{error:"cant load news"}});
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({type: SEARCH_NEWS_FAIL,payload:{error:"cant load news"}});
+    });
+};

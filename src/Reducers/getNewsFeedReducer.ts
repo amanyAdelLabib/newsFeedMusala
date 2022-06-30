@@ -5,6 +5,7 @@ import {
   SEARCH_NEWS_PENDING,
   SEARCH_NEWS_SUCCESS,
   SEARCH_NEWS_FAIL,
+  RESET_SEARCH_NEWS
 } from '../Actions/types';
 
 const initialState = {
@@ -48,6 +49,16 @@ export const getNewsFeedReducer = (
         allNewsFeedLoading: false,
       };
     }
+
+      // ************************ reset search news feed  *****************
+      case RESET_SEARCH_NEWS: {
+        const {response} = action.payload;
+        return {
+          ...state,
+          searchedNews: []
+        };
+      }
+  
 
     // ************************ error *****************
 

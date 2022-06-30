@@ -4,7 +4,8 @@ import {
   GET_NEWS_FEED_FAIL,
   SEARCH_NEWS_PENDING.
   SEARCH_NEWS_SUCCESS,
-  SEARCH_NEWS_FAIL
+  SEARCH_NEWS_FAIL,
+  RESET_SEARCH_NEWS
 } from './types';
 import {GetNewsFeed,SearchNews} from '../Services';
 import {Category} from '../Constants';
@@ -44,4 +45,7 @@ export const searchNewsFeed = ( word: string = '') =>(dispatch: Function) => {
       console.log(err);
       dispatch({type: SEARCH_NEWS_FAIL,payload:{error:"cant load news"}});
     });
+};
+export const resetSearchNewsFeed = ( ) =>(dispatch: Function) => {
+  dispatch({type: RESET_SEARCH_NEWS});
 };

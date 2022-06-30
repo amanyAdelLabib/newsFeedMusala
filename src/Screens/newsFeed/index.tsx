@@ -19,7 +19,7 @@ export const NewsFeed: React.FC = () => {
   );
 
   useEffect(() => {
-    dispatch(getNewsFeed());
+    dispatch(getNewsFeed(selectedCategory));
   }, []);
 
   useEffect(() => {

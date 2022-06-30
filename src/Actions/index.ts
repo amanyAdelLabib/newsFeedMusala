@@ -4,13 +4,13 @@ import {
   GET_NEWS_FEED_FAIL,
 } from './types';
 import {GetNewsFeed} from '../Services';
+import {Category} from '../Constants';
 
-export const getNewsFeed = () => {
+export const getNewsFeed = ( category: String = Category.business) =>(dispatch: Function) => {
   console.log('getCurrenciesType');
-  return dispatch => {
     console.log('data in getNewsFeed');
     dispatch({type: GET_NEWS_FEED_PENDING});
-    GetNewsFeed()
+    GetNewsFeed(category)
       .then(res => {
         if (res.status == 200) {
           dispatch({
@@ -28,4 +28,3 @@ export const getNewsFeed = () => {
         dispatch({type: GET_NEWS_FEED_FAIL,payload:{error:"cant load news"}});
       });
   };
-};

@@ -1,4 +1,4 @@
-import React, {useEffect,useCallback} from 'react';
+import React, {useEffect,useCallback,useMemo} from 'react';
 import {RefreshControl, View,FlatList,useColorScheme} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {getNewsFeed} from '../../Actions';
@@ -21,6 +21,10 @@ export const NewsFeed: React.FC = () => {
     console.log(allNewsFeed)
   }, [allNewsFeed]);
 
+  const formattedAllNewsFeed = useMemo(
+    () => allNewsFeed?.articles,
+    [allNewsFeed],
+  );
   const handleRefresh = useCallback(() => {
     dispatch(getNewsFeed());
   }, [dispatch]);
@@ -32,7 +36,7 @@ export const NewsFeed: React.FC = () => {
     <FlatList
       keyExtractor={(item, index) => index.toString()}
       showsVerticalScrollIndicator={false}
-      data={allNewsFeed?.articles}
+      data={formattedAllNewsFeed}
       renderItem={({item, index}: any) => (
         <NewsArticle post={item} />
       )}

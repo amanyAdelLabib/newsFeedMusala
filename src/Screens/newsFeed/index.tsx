@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {Text, View,FlatList,useColorScheme} from 'react-native';
+import React, {useEffect,useCallback} from 'react';
+import {RefreshControl, View,FlatList,useColorScheme} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {getNewsFeed} from '../../Actions';
 import {NewsArticle} from '../../Components';
@@ -21,6 +21,9 @@ export const NewsFeed: React.FC = () => {
     console.log(allNewsFeed)
   }, [allNewsFeed]);
 
+  const handleRefresh = useCallback(() => {
+    dispatch(getNewsFeed());
+  }, [dispatch]);
   const backgroundColor = useColorScheme() === 'dark' ? Colors.black : Colors.white;
 
   return (
@@ -33,6 +36,9 @@ export const NewsFeed: React.FC = () => {
       renderItem={({item, index}: any) => (
         <NewsArticle post={item} />
       )}
+      refreshControl={
+        <RefreshControl refreshing={allNewsFeedLoading} onRefresh={handleRefresh} />
+      }
       style={styles.list}
     />
   </View>

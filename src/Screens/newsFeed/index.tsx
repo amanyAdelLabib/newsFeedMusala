@@ -1,12 +1,18 @@
-import React, {useEffect,useCallback,useMemo} from 'react';
+import React, {useEffect,useCallback,useMemo,useState} from 'react';
 import {RefreshControl, View,FlatList,useColorScheme} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {getNewsFeed} from '../../Actions';
 import {NewsArticle} from '../../Components';
 import styles from './styles';
 import { Colors } from '../../Utils/Colors';
+import {Category} from '../../Constants';
 export const NewsFeed: React.FC = () => {
   const dispatch: Function = useDispatch();
+
+  const [selectedCategory, setSelectedCategory] = useState(
+    Category.business,
+  );
+
 
   const {data: allNewsFeed, allNewsFeedLoading} = useSelector(
     state => state?.newsFeedReducer || [],

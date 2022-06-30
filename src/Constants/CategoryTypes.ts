@@ -1,8 +1,8 @@
-interface NewsCategoryTypes {
+interface CategoryTypes {
     [key: string]: string;
   }
   
-  export const NewsCategory: NewsCategoryTypes = {
+  export const Category: CategoryTypes = {
     business: 'business',
     entertainment: 'entertainment',
     general: 'general',

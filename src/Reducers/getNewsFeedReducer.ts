@@ -52,7 +52,6 @@ export const getNewsFeedReducer = (
 
       // ************************ reset search news feed  *****************
       case RESET_SEARCH_NEWS: {
-        const {response} = action.payload;
         return {
           ...state,
           searchedNews: []

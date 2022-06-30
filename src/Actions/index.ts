@@ -2,7 +2,7 @@ import {
   GET_NEWS_FEED_PENDING,
   GET_NEWS_FEED_SUCCESS,
   GET_NEWS_FEED_FAIL,
-  SEARCH_NEWS_PENDING.
+  SEARCH_NEWS_PENDING,
   SEARCH_NEWS_SUCCESS,
   SEARCH_NEWS_FAIL,
   RESET_SEARCH_NEWS
@@ -29,6 +29,7 @@ export const getNewsFeed = ( category: string = Category.business) =>(dispatch: 
       });
   };
 export const searchNewsFeed = ( word: string = '') =>(dispatch: Function) => {
+  console.log('SearchInput')
   dispatch({type: SEARCH_NEWS_PENDING});
   SearchNews(word)
     .then(res => {

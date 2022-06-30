@@ -2,7 +2,7 @@ import React, {useEffect, useCallback, useMemo, useState} from 'react';
 import {RefreshControl, View, FlatList, useColorScheme} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {getNewsFeed} from '../../Actions';
-import {NewsArticle,NewsTag} from '../../Components';
+import {NewsArticle, NewsTag,SearchInput} from '../../Components';
 import styles from './styles';
 import {Colors} from '../../Utils/Colors';
 import {Category} from '../../Constants';
@@ -10,15 +10,16 @@ export const NewsFeed: React.FC = () => {
   const dispatch: Function = useDispatch();
 
   const [selectedCategory, setSelectedCategory] = useState(Category.business);
-
-  const {data: allNewsFeed, allNewsFeedLoading} = useSelector(
-    (state: any) => state?.newsFeedReducer || [],
-  );
+  const [searchText, setSearchText] = useState('');
+  const {
+    data: allNewsFeed,
+    allNewsFeedLoading,
+    searchedNews,
+  } = useSelector((state: any) => state?.newsFeedReducer || []);
 
   useEffect(() => {
     dispatch(getNewsFeed(selectedCategory));
   }, [dispatch, selectedCategory]);
-
 
   useEffect(() => {
     console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa');
@@ -26,7 +27,7 @@ export const NewsFeed: React.FC = () => {
   }, [allNewsFeed]);
 
   const formattedAllNewsFeed = useMemo(
-    () => allNewsFeed?.articles,
+    () => allNewsFeed,
     [allNewsFeed],
   );
   const handleRefresh = useCallback(() => {
@@ -37,15 +38,22 @@ export const NewsFeed: React.FC = () => {
 
   return (
     <View style={[styles.container, {backgroundColor}]}>
-      <NewsTag
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
+      <SearchInput
+        searchText={searchText}
+        setSearchText={setSearchText}
+        // setIsLoading={setIsLoading}
       />
+      {!searchText?.trim() && (
+        <NewsTag
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+      )}
 
       <FlatList
-        keyExtractor={(item: string, index:number) => index.toString()}
+        keyExtractor={(item: string, index: number) => index.toString()}
         showsVerticalScrollIndicator={false}
-        data={formattedAllNewsFeed}
+        data={!searchText?.trim() ?formattedAllNewsFeed:searchedNews}
         renderItem={({item, index}: any) => <NewsArticle post={item} />}
         refreshControl={
           <RefreshControl

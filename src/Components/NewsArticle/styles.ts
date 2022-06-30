@@ -1,32 +1,26 @@
-import {Platform, StyleSheet} from 'react-native';
-
-const boxShadow: any = Platform.select({
-  ios: {
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 0,
-    },
-    shadowOpacity: 0.4,
-    shadowRadius: 4,
-  },
-  android: {elevation: 6},
-});
+import { StyleSheet} from 'react-native';
+import {
+  responsiveFontSize,
+  responsiveHeight,
+  responsiveWidth,
+} from 'react-native-responsive-dimensions';
+import {spacing} from '../../Utils/Sizing';
+import { Colors } from './../../Utils/Colors';
 
 export default StyleSheet.create({
   container: {
-    height: 240,
-    marginBottom: 18,
-    backgroundColor: '#eee',
+    height: responsiveHeight(35),
+    marginBottom: spacing.md,
+    backgroundColor: Colors.appColor1,
     borderRadius: 24,
-    marginHorizontal: 16,
-    ...boxShadow,
+    marginHorizontal:  spacing.md,
+    elevation: 6,
   },
   imageContainer: {flex: 1},
   image: {
     flex: 1,
     borderRadius: 24,
-    height: 300,
+    height: responsiveHeight(30),
   },
   titleContainer: {
     position: 'absolute',
@@ -35,24 +29,24 @@ export default StyleSheet.create({
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
     height: 160,
-    paddingLeft: 16,
-    paddingRight: 10,
+    paddingLeft:  spacing.md,
+    paddingRight:  spacing.sm,
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
   },
   text: {
-    fontSize: 18,
+    fontSize: responsiveFontSize(2.3),
     fontWeight: '600',
     lineHeight: 24,
-    color: '#fff',
-    paddingBottom: 24,
+    color: Colors.white,
+    paddingBottom: spacing.lg,
   },
   timestamp: {
     position: 'absolute',
-    color: '#eee',
-    fontSize: 12,
+    color: Colors.appColor1,
+    fontSize: responsiveFontSize(1.5),
     fontWeight: '300',
-    right: 16,
-    bottom: 8,
+    right: spacing.md,
+    bottom: spacing.sm,
   },
 });

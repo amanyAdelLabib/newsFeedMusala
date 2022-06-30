@@ -20,7 +20,6 @@ export const NewsFeed: React.FC = () => {
     console.log(allNewsFeed)
   }, [allNewsFeed]);
 
-
   return (
       
     <View style={[styles.container]}>

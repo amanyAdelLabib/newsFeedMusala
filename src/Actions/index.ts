@@ -10,9 +10,9 @@ import {
 import {GetNewsFeed,SearchNews} from '../Services';
 import {Category} from '../Constants';
 
-export const getNewsFeed = ( category: string = Category.business) =>(dispatch: Function) => {
+export const getNewsFeed = ( category: string = Category.business,pageSize: number = 5) =>(dispatch: Function) => {
     dispatch({type: GET_NEWS_FEED_PENDING});
-    GetNewsFeed(category)
+    GetNewsFeed(category,pageSize)
       .then(res => {
         if (res.status == 200) {
           dispatch({

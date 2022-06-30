@@ -3,13 +3,11 @@ import {TextInput, useColorScheme} from 'react-native';
 import {useDispatch} from 'react-redux';
 import {searchNewsFeed, resetSearchNewsFeed} from '../../Actions';
 import styles from './styles';
-// import {debounce} from 'lodash';
 import { Colors } from '../../Utils/Colors';
 export const SearchInput: React.FC<{
   searchText: string;
   setSearchText: Function;
-  setIsLoading: Function;
-}> = ({searchText, setSearchText, setIsLoading}) => {
+}> = ({searchText, setSearchText}) => {
   const backgroundColor = useColorScheme() === 'dark' ? Colors.appColor6 : Colors.appColor7;
   const placeholderColor = useColorScheme() === 'dark' ? Colors.appColor1 : Colors.appColor8;
   const color = useColorScheme() === 'dark' ? Colors.black : Colors.white;
@@ -22,7 +20,7 @@ export const SearchInput: React.FC<{
         dispatch(resetSearchNewsFeed());
       }
     },
-    [setSearchText, dispatch, setIsLoading],
+    [setSearchText, dispatch],
   );
   return (
     <TextInput

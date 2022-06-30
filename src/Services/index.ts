@@ -9,10 +9,10 @@ const apiClient = axios.create({
 });
 
 /*********************** get news feed api  **************************************************/
-export const GetNewsFeed = (category: string = Category.health) => {
+export const GetNewsFeed = (category: string = Category.health,pageSize: number = 5) => {
   return apiClient
     .get(
-      `top-headlines?category=${category}&apiKey=3b3bd5c8e81a454d9035794b4db8d8ee&pageSize=5`,
+      `top-headlines?category=${category}&apiKey=3b3bd5c8e81a454d9035794b4db8d8ee&pageSize=${pageSize}`,
     )
     .then(res => {
       console.log('get news feed api');

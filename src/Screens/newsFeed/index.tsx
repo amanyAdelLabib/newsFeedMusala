@@ -11,6 +11,7 @@ export const NewsFeed: React.FC = () => {
 
   const [selectedCategory, setSelectedCategory] = useState(Category.business);
   const [searchText, setSearchText] = useState('');
+  const [articleNumber, setArticleNumber] = useState(5);
   const {
     data: allNewsFeed,
     allNewsFeedLoading,
@@ -18,8 +19,8 @@ export const NewsFeed: React.FC = () => {
   } = useSelector((state: any) => state?.newsFeedReducer || []);
 
   useEffect(() => {
-    dispatch(getNewsFeed(selectedCategory));
-  }, [dispatch, selectedCategory]);
+    dispatch(getNewsFeed(selectedCategory,articleNumber));
+  }, [dispatch, selectedCategory, articleNumber]);
 
   useEffect(() => {
     console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa');
@@ -31,8 +32,13 @@ export const NewsFeed: React.FC = () => {
     [allNewsFeed],
   );
   const handleRefresh = useCallback(() => {
-    dispatch(getNewsFeed(selectedCategory));
-  }, [dispatch, selectedCategory]);
+    dispatch(getNewsFeed(selectedCategory,articleNumber));
+  }, [dispatch, selectedCategory, articleNumber]);
+
+  const loadMoreArticles=()=>{
+    if(articleNumber + 5 < 101)
+    setArticleNumber(articleNumber+5)
+  }
   const backgroundColor =
     useColorScheme() === 'dark' ? Colors.black : Colors.white;
 
@@ -41,7 +47,6 @@ export const NewsFeed: React.FC = () => {
       <SearchInput
         searchText={searchText}
         setSearchText={setSearchText}
-        // setIsLoading={setIsLoading}
       />
       {!searchText?.trim() && (
         <NewsTag
@@ -61,6 +66,8 @@ export const NewsFeed: React.FC = () => {
             onRefresh={handleRefresh}
           />
         }
+        onEndReached={()=>loadMoreArticles()}
+        onEndReachedThreshold={0.3}
         style={styles.list}
       />
     </View>

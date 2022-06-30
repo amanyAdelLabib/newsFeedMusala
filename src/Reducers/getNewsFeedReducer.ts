@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   data: {},
-  loading:false,
+  allNewsFeedLoading:false,
   errors: [],
 };
 
@@ -17,7 +17,7 @@ export const getNewsFeedReducer = (state = initialState,  action = {}) => {
     case GET_NEWS_FEED_PENDING: {
       return {
         ...state,
-        loading: true,
+        allNewsFeedLoading: true,
       };
     }
 
@@ -27,7 +27,7 @@ export const getNewsFeedReducer = (state = initialState,  action = {}) => {
       return {
         ...state,
         data: response,
-        loading: false,
+        allNewsFeedLoading: false,
       };
     }
 
@@ -38,7 +38,7 @@ export const getNewsFeedReducer = (state = initialState,  action = {}) => {
       return {
         ...state,
         errors: error,
-        loading: false,
+        allNewsFeedLoading: false,
       };
     }
     // ************************ default  *****************

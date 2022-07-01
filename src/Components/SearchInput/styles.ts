@@ -7,7 +7,7 @@ import {
   import {spacing} from '../../Utils/Sizing';
 export default StyleSheet.create({
   container: {
-    height: 40,
+    height: responsiveHeight(5),
     marginHorizontal: spacing.lg,
     marginBottom: spacing.sm,
     borderRadius: 20,

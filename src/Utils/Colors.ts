@@ -9,6 +9,7 @@ export const Colors={
     appColor6:'#333',
     appColor7:'#ddd',
     appColor8:'#111',
+    appColor9:'rgb(246 248 250)'
 
 }
 

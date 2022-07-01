@@ -10,7 +10,7 @@ export const SearchInput: React.FC<{
 }> = ({searchText, setSearchText}) => {
   const backgroundColor = useColorScheme() === 'dark' ? Colors.appColor6 : Colors.appColor7;
   const placeholderColor = useColorScheme() === 'dark' ? Colors.appColor1 : Colors.appColor8;
-  const color = useColorScheme() === 'dark' ? Colors.black : Colors.white;
+  const color = useColorScheme() === 'dark' ? Colors.white : Colors.black;
   const dispatch: Function = useDispatch();
   const searchForText = useCallback(
   (text: string) => {

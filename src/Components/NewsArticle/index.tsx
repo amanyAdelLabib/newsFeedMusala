@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{useCallback} from 'react';
 import {Image, Text,View, TouchableOpacity} from 'react-native';
 import moment from 'moment';
 import LinearGradient from 'react-native-linear-gradient';
+import {useNavigation} from '@react-navigation/native';
 
 import styles from './styles';
 
@@ -16,8 +17,12 @@ type Post = {
 export const NewsArticle: React.FC<{
   post: Post;
 }> = ({post}) => {
+  const navigation: any = useNavigation();
+  const handleNavigate = useCallback(() => {
+    navigation.navigate('Details', {article: post});
+  }, [ navigation, post]);
   return (
-    <TouchableOpacity activeOpacity={1} style={styles.container}>
+    <TouchableOpacity activeOpacity={1} style={styles.container} onPress={handleNavigate}>
       <Image
         source={{
           uri: post?.urlToImage ?? 'https://picsum.photos/800',

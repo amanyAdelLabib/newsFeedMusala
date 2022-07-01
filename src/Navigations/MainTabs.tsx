@@ -23,12 +23,22 @@ function MainTabs() {
   return (
     <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Tab.Navigator
-        screenOptions={{headerShown: false}}
+        screenOptions={{headerShown: false, tabBarStyle: {
+          borderTopLeftRadius: 24,
+          borderTopRightRadius: 24,
+          backgroundColor:scheme === 'dark'?Colors.black :Colors.appColor1,
+          position: 'absolute',
+          overflow: 'hidden',
+        }}}
+        
+        
         tabBarOptions={{
-          labelStyle: {fontSize: responsiveFontSize(2), marginBottom: spacing.md,fontWeight:'bold'},
-          activeTintColor: 'red',
-          inactiveTintColor: scheme === 'dark' ? Colors.white : Colors.appColor9,
+          
+          labelStyle: {fontSize: responsiveFontSize(2), marginBottom: spacing.md,fontWeight:'bold',},
+          // activeTintColor: 'red',
+          // inactiveTintColor: scheme === 'dark' ? Colors.white : Colors.appColor9,
           tabBarShowLabel: false,
+          
         }}
         initialRouteName="Home">
         <Tab.Screen

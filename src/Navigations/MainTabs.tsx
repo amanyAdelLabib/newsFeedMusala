@@ -1,4 +1,4 @@
-import * as React from 'react';
+import  React,{useEffect} from 'react';
 import {useColorScheme} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
@@ -9,17 +9,28 @@ import {
 } from '@react-navigation/native';
 import {
   responsiveFontSize,
-  responsiveHeight,
-  responsiveWidth,
 } from 'react-native-responsive-dimensions';
+import { useSelector} from 'react-redux';
+
+import {translate,setI18nConfig } from '../Translation/TranslateConfig';
+
 import HomeStack from './HomeStack';
 import SettingStack from './SettingStack';
 import { Colors } from '../Utils/Colors';
 import { spacing } from '../Utils/Sizing';
 const Tab = createBottomTabNavigator();
 
-function MainTabs() {
+export const MainTabs: React.FC = () => {
   const scheme = useColorScheme();
+  const languageCode = useSelector((state: any) => state?.changeLanguageReducer.languageCode || 'en' );
+  
+  useEffect(() => {
+    setI18nConfig(languageCode); 
+  }, []);
+  useEffect(() => {
+    setI18nConfig(languageCode); 
+  }, [languageCode]);
+
   return (
     <NavigationContainer theme={scheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Tab.Navigator
@@ -37,19 +48,19 @@ function MainTabs() {
           labelStyle: {fontSize: responsiveFontSize(2), marginBottom: spacing.md,fontWeight:'bold',},
           // activeTintColor: 'red',
           // inactiveTintColor: scheme === 'dark' ? Colors.white : Colors.appColor9,
-          tabBarShowLabel: false,
+          // tabBarShowLabel: false,
           
         }}
         initialRouteName="Home">
         <Tab.Screen
-          name="Home"
+          name={translate('home')}
           component={HomeStack}
           options={{
             tabBarIcon: () => null,
           }}
         />
         <Tab.Screen
-          name="Setting"
+          name={translate('settings')}
           component={SettingStack}
           options={{
             tabBarIcon: () => null,
@@ -60,4 +71,4 @@ function MainTabs() {
   );
 }
 
-export default MainTabs;
+// export default MainTabs;

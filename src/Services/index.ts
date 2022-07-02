@@ -15,14 +15,9 @@ export const GetNewsFeed = (category: string = Category.health,pageSize: number 
       `top-headlines?category=${category}&apiKey=3b3bd5c8e81a454d9035794b4db8d8ee&pageSize=${pageSize}`,
     )
     .then(res => {
-      console.log('get news feed api');
-      console.log(res);
       return res;
     })
     .catch(err => {
-      console.log('in login class catch err');
-      console.log(err);
-      console.log(err.response.data);
       return err;
     });
 };
@@ -37,8 +32,6 @@ export const SearchNews = (searchWord: string = '') => {
       return res;
     })
     .catch(err => {
-      console.log(err);
-      console.log(err.response.data);
       return err;
     });
 };

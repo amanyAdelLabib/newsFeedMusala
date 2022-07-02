@@ -4,6 +4,8 @@ import {useDispatch} from 'react-redux';
 import {searchNewsFeed, resetSearchNewsFeed} from '../../Actions';
 import styles from './styles';
 import { Colors } from '../../Utils/Colors';
+import {translate } from '../../Translation/TranslateConfig';
+
 export const SearchInput: React.FC<{
   searchText: string;
   setSearchText: Function;
@@ -24,7 +26,7 @@ export const SearchInput: React.FC<{
   );
   return (
     <TextInput
-      placeholder={'Search'}
+      placeholder={translate('search')}
       placeholderTextColor={placeholderColor}
       style={[styles.container, {backgroundColor, color}]}
       value={searchText}

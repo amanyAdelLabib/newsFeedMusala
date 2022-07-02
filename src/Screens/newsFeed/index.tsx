@@ -1,13 +1,15 @@
 import React, {useEffect, useCallback, useMemo, useState} from 'react';
-import {RefreshControl, View, FlatList, useColorScheme} from 'react-native';
+import {RefreshControl, View,Text, FlatList, useColorScheme} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
-import {getNewsFeed} from '../../Actions';
+import {getNewsFeed,changeLanguage} from '../../Actions';
 import {NewsArticle, NewsTag,SearchInput} from '../../Components';
 import styles from './styles';
 import {Colors} from '../../Utils/Colors';
 import {Category} from '../../Constants';
+
 export const NewsFeed: React.FC = () => {
   const dispatch: Function = useDispatch();
+
 
   const [selectedCategory, setSelectedCategory] = useState(Category.business);
   const [searchText, setSearchText] = useState('');
@@ -17,15 +19,17 @@ export const NewsFeed: React.FC = () => {
     allNewsFeedLoading,
     searchedNews,
   } = useSelector((state: any) => state?.newsFeedReducer || []);
+  const languageCode = useSelector((state: any) => state?.changeLanguageReducer.languageCode || 'en' );
+
+
+  useEffect(() => {
+    dispatch(changeLanguage(languageCode));
+  }, []);
 
   useEffect(() => {
     dispatch(getNewsFeed(selectedCategory,articleNumber));
   }, [dispatch, selectedCategory, articleNumber]);
 
-  useEffect(() => {
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaa');
-    console.log(allNewsFeed);
-  }, [allNewsFeed]);
 
   const formattedAllNewsFeed = useMemo(
     () => allNewsFeed,

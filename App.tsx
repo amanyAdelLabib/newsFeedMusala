@@ -5,7 +5,7 @@ import {store} from './src/Store';
 import {NewsFeed} from './src/Screens'
 import { HomeStack } from './src/Navigations/HomeStack';
 import { NavigationContainer } from '@react-navigation/native';
-import  MainTabs  from './src/Navigations/MainTabs';
+import  {MainTabs}  from './src/Navigations/MainTabs';
 
 
 const App: React.FC = () => {

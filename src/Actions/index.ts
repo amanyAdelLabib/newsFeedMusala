@@ -5,10 +5,12 @@ import {
   SEARCH_NEWS_PENDING,
   SEARCH_NEWS_SUCCESS,
   SEARCH_NEWS_FAIL,
-  RESET_SEARCH_NEWS
+  RESET_SEARCH_NEWS,
+  CHANGE_LANGUAGE
 } from './types';
 import {GetNewsFeed,SearchNews} from '../Services';
 import {Category} from '../Constants';
+import {translate,setI18nConfig } from '../Translation/TranslateConfig';
 
 export const getNewsFeed = ( category: string = Category.business,pageSize: number = 5) =>(dispatch: Function) => {
     dispatch({type: GET_NEWS_FEED_PENDING});
@@ -24,12 +26,10 @@ export const getNewsFeed = ( category: string = Category.business,pageSize: numb
         }
       })
       .catch(err => {
-        console.log(err);
         dispatch({type: GET_NEWS_FEED_FAIL,payload:{error:"cant load news"}});
       });
   };
 export const searchNewsFeed = ( word: string = '') =>(dispatch: Function) => {
-  console.log('SearchInput')
   dispatch({type: SEARCH_NEWS_PENDING});
   SearchNews(word)
     .then(res => {
@@ -43,10 +43,15 @@ export const searchNewsFeed = ( word: string = '') =>(dispatch: Function) => {
       }
     })
     .catch(err => {
-      console.log(err);
       dispatch({type: SEARCH_NEWS_FAIL,payload:{error:"cant load news"}});
     });
 };
 export const resetSearchNewsFeed = ( ) =>(dispatch: Function) => {
   dispatch({type: RESET_SEARCH_NEWS});
+};
+
+export const changeLanguage = ( code: string = 'en') =>(dispatch: Function) => {
+  setI18nConfig(code);
+  dispatch({type: CHANGE_LANGUAGE,payload: {response: code}});
+
 };

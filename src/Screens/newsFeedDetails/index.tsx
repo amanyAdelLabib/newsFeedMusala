@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
+  LogBox
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -15,6 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import {Colors} from '../../Utils/Colors';
 import {translate} from '../../Translation/TranslateConfig';
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 interface Route {
   params: {

@@ -1,11 +1,12 @@
 import React, {useEffect, useCallback, useMemo, useState} from 'react';
-import {RefreshControl, View,Text, FlatList, useColorScheme} from 'react-native';
+import {RefreshControl, View,Text, FlatList, useColorScheme,LogBox } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {getNewsFeed,changeLanguage} from '../../Actions';
 import {NewsArticle, NewsTag,SearchInput} from '../../Components';
 import styles from './styles';
 import {Colors} from '../../Utils/Colors';
 import {Category} from '../../Constants';
+LogBox.ignoreAllLogs();//Ignore all log notifications
 
 export const NewsFeed: React.FC = () => {
   const dispatch: Function = useDispatch();

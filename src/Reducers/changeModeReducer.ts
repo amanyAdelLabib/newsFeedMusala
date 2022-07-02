@@ -1,22 +1,23 @@
 import {
-    CHANGE_LANGUAGE,
+    CHANGE_MODE
   } from '../Actions/types';
   
   const initialState = {
-    languageCode: '',
+     mode: 'light',
 
   };
   
-  export const changeLanguageReducer = (
+  export const changeModeReducer = (
     state = initialState,
     action: {type: String; payload: any},
   ) => {
     switch (action.type) {
 
-      case CHANGE_LANGUAGE: {
+      case CHANGE_MODE: {
         const {response} = action.payload;
         return {
-            languageCode:response
+          ...state,
+            mode:response
         };
       }
   

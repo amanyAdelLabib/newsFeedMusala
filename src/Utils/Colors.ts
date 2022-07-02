@@ -10,7 +10,12 @@ export const Colors={
     appColor7:'#ddd',
     appColor8:'#111',
     appColor9:'rgb(246 248 250)',
-    appColor10:'#00beff'
+    appColor10:'#00beff',
+    appColor11:'#bbb',
+    appColor12:'#444',
+    appColor13:'#222',
+    appColor14:'#ddd',
+
 
 }
 

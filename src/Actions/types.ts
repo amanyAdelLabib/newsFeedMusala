@@ -7,4 +7,7 @@ export const SEARCH_NEWS_SUCCESS = 'search_news_success';
 export const SEARCH_NEWS_FAIL = 'search_news_fail';
 
 export const RESET_SEARCH_NEWS = 'reset_search_news';
+
 export const CHANGE_LANGUAGE = 'change_language';
+
+export const CHANGE_MODE = 'change_mode';

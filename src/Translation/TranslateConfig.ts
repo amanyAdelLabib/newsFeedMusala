@@ -17,7 +17,7 @@ export  const translate = memoize(
 	(key, config) => (config ? key + JSON.stringify(config) : key)
   );
   
-export  const setI18nConfig = (lang='en') => {
+export  const setI18nConfig = (lang) => {
 	// fallback if no available language fits
 	const fallback = { languageTag: lang, isRTL: false };
   

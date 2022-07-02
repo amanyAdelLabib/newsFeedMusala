@@ -2,7 +2,9 @@
   "home": "Accueil",
   "this line is translated": "यह पंक्ति अनुवादित है",
   "settings": "Paramètres",
-  "language_select": "Choisir une langue",
+  "selectLanguage": "Choisir une langue",
+  "selectMode": "Sélectionnez le mode",
+
   "business": "Entreprise",
   "entertainment": "divertissement",
   "general": "général",

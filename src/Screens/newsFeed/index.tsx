@@ -13,6 +13,8 @@ export const NewsFeed: React.FC = () => {
 
   const [selectedCategory, setSelectedCategory] = useState(Category.business);
   const [searchText, setSearchText] = useState('');
+  const [mode, setMode] = useState('');
+
   const [articleNumber, setArticleNumber] = useState(5);
   const {
     data: allNewsFeed,
@@ -20,12 +22,24 @@ export const NewsFeed: React.FC = () => {
     searchedNews,
   } = useSelector((state: any) => state?.newsFeedReducer || []);
   const languageCode = useSelector((state: any) => state?.changeLanguageReducer.languageCode || 'en' );
-
+  const modeApp = useSelector(
+    (state: any) => state?.changeModeReducer.mode || '',
+  );
+  const backgroundColor =
+    useColorScheme() === 'dark' || mode === 'dark'? Colors.black : Colors.white;
 
   useEffect(() => {
     dispatch(changeLanguage(languageCode));
+    setMode(modeApp)
   }, []);
 
+  useEffect(() => {
+    dispatch(changeLanguage(languageCode));
+    setMode(modeApp)
+  }, [modeApp,languageCode]);
+  // useEffect(() => {
+  //   setMode(modeApp);
+  // }, [modeApp]);
   useEffect(() => {
     dispatch(getNewsFeed(selectedCategory,articleNumber));
   }, [dispatch, selectedCategory, articleNumber]);
@@ -43,8 +57,6 @@ export const NewsFeed: React.FC = () => {
     if(articleNumber + 5 < 101)
     setArticleNumber(articleNumber+5)
   }
-  const backgroundColor =
-    useColorScheme() === 'dark' ? Colors.black : Colors.white;
 
   return (
     <View style={[styles.container, {backgroundColor}]}>

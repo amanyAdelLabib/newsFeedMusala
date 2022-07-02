@@ -6,7 +6,8 @@ import {
   SEARCH_NEWS_SUCCESS,
   SEARCH_NEWS_FAIL,
   RESET_SEARCH_NEWS,
-  CHANGE_LANGUAGE
+  CHANGE_LANGUAGE,
+  CHANGE_MODE
 } from './types';
 import {GetNewsFeed,SearchNews} from '../Services';
 import {Category} from '../Constants';
@@ -53,5 +54,10 @@ export const resetSearchNewsFeed = ( ) =>(dispatch: Function) => {
 export const changeLanguage = ( code: string = 'en') =>(dispatch: Function) => {
   setI18nConfig(code);
   dispatch({type: CHANGE_LANGUAGE,payload: {response: code}});
+
+};
+
+export const changeMode = ( mode: string='' ) =>(dispatch: Function) => {
+  dispatch({type: CHANGE_MODE,payload: {response: mode}});
 
 };

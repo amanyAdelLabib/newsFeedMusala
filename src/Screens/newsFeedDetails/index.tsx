@@ -1,4 +1,4 @@
-import React, { useCallback} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   Image,
   Linking,
@@ -8,11 +8,13 @@ import {
   useColorScheme,
   View,
 } from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+
 import {Icon} from '@rneui/themed';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import {Colors} from '../../Utils/Colors';
-import { translate } from '../../Translation/TranslateConfig';
+import {translate} from '../../Translation/TranslateConfig';
 
 interface Route {
   params: {
@@ -30,17 +32,35 @@ interface Route {
 export const NewsFeedDetails: React.FC<{route: Route}> = ({route}) => {
   const {article} = route?.params;
   const navigation = useNavigation();
-  const goBack = useCallback(() => {
-    navigation.goBack();
-  }, [navigation]);
-  const backgroundColor = useColorScheme() === 'dark' ? '#000' : '#fff';
-  const color = useColorScheme() === 'dark' ? '#fff' : '#000';
-  const contentColor = useColorScheme() === 'dark' ? '#bbb' : '#444';
-  const readMoreBgColor = useColorScheme() === 'dark' ? '#222' : '#ddd';
+
+  const [mode, setMode] = useState('');
+
+  const modeApp = useSelector(
+    (state: any) => state?.changeModeReducer.mode || '',
+  );
+
+  const backgroundColor =
+    useColorScheme() === 'dark' || mode === 'dark' ? '#000' : '#fff';
+  const color =
+    useColorScheme() === 'dark' || mode === 'dark' ? '#fff' : '#000';
+  const contentColor =
+    useColorScheme() === 'dark' || mode === 'dark' ? '#bbb' : '#444';
+  const readMoreBgColor =
+    useColorScheme() === 'dark' || mode === 'dark' ? '#222' : '#ddd';
+
+  useEffect(() => {
+    setMode(modeApp);
+  }, []);
+
+  useEffect(() => {
+    setMode(modeApp);
+  }, [modeApp]);
   const handleURLPress = useCallback(() => {
     Linking.openURL(article?.url);
   }, [article]);
-
+  const goBack = useCallback(() => {
+    navigation.goBack();
+  }, [navigation]);
   return (
     <>
       <TouchableOpacity style={styles.crossContainer} onPress={goBack}>

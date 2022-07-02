@@ -12,6 +12,7 @@ import {Icon} from '@rneui/themed';
 import {useNavigation} from '@react-navigation/native';
 import styles from './styles';
 import {Colors} from '../../Utils/Colors';
+import { translate } from '../../Translation/TranslateConfig';
 
 interface Route {
   params: {
@@ -69,7 +70,7 @@ export const NewsFeedDetails: React.FC<{route: Route}> = ({route}) => {
       <View
         style={[styles.readMoreContainer, {backgroundColor: readMoreBgColor}]}>
         <Text style={[styles.readMoreText, {color}]} numberOfLines={2}>
-          Read more at{' '}
+          {translate('readMore')}:{' '}
           <Text style={styles.link} onPress={handleURLPress}>
             {article?.url}
           </Text>

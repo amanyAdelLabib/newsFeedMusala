@@ -48,7 +48,7 @@ export default StyleSheet.create({
     paddingTop: spacing.md,
     paddingBottom: spacing.lg,
     paddingHorizontal: spacing.lg,
-    bottom: 0,
+    bottom: 30,
     width: '100%',
   },
   readMoreText: {
